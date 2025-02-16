@@ -36,7 +36,14 @@ public class CheckoutPage : BasePage
         var continueButton = container.FindElementByClassName("payment-method-next-step-button");
         continueButton.Click();
     }
-
+    
+    public void ClickContinueOnPaymentInformation()
+    {
+        var container = driver.FindElementById("payment-info-buttons-container");
+        var continueButton = container.FindElementByClassName("payment-info-next-step-button");
+        continueButton.Click();
+    }
+    
     public void SelectPaymentMethod(PaymentMethod method)
     {
         var methodName = method switch
@@ -82,12 +89,23 @@ public class CheckoutPage : BasePage
         driver.FindElementById("CreditCardType").SelectOptionByText(data.CreditCardType);
         driver.FindElementById("CardholderName").SendKeys(data.CardholderName);
         driver.FindElementById("CardNumber").SendKeys(data.CardNumber);
-        driver.FindElementById("ExpireMonth").SendKeys(data.ExpirationMonth);
-        driver.FindElementById("ExpireYear").SendKeys(data.ExpirationYear);
+        driver.FindElementById("ExpireMonth").SelectOptionByText(data.ExpirationMonth);
+        driver.FindElementById("ExpireYear").SelectOptionByText(data.ExpirationYear);
+        driver.FindElementById("CardCode").SendKeys(data.CVV);
     }
     
     public void ConfirmOrder()
     {
-        driver.FindElementByClassName("confirm-order-next-step-button").Click();
+        var container = driver.FindElementById("confirm-order-buttons-container");
+        var continueButton = container.FindElementByClassName("confirm-order-next-step-button");
+        continueButton.Click();
+    }
+    
+    public bool IsOrderSuccessfullyProcessed()
+    {
+        Thread.Sleep(2000);
+        return driver.FindElementByText("Your order has been successfully processed!").IsDisplayed();
+        // var successMessage = driver.FindElementByClassName("order-completed");
+        // return successMessage.IsDisplayed();
     }
 }

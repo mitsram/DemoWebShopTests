@@ -37,8 +37,9 @@ public class CheckoutTests : BaseTest
         shop.ChooseShippingMethod(ShippingMethod.Standard);
         shop.ProvidePaymentDetails(PaymentMethod.CreditCard, paymentInfomation);        
         shop.CompleteCheckout();
-        shop.VerifyOrderConfirmation();
+        var result = shop.VerifyOrderConfirmation();
 
         // Assert
+        Assert.That(result, Is.True);
     }
 }

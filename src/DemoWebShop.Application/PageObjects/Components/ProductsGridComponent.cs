@@ -22,5 +22,6 @@ public class ProductsGridComponent : BasePage
         // Find and click the add to cart button
         var addToCartButton = driver.FindElementByClassName("add-to-cart-button");
         addToCartButton.Click();
+        Thread.Sleep(1000);
     }
 }

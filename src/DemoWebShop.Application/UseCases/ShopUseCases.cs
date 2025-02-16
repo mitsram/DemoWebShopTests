@@ -59,6 +59,7 @@ public class ShopUseCases(IWebDriverAdapter driver)
     public void ProvidePaymentDetails(PaymentMethod method, PaymentInformation? data = null)
     {
         checkoutPage.SelectPaymentMethod(method);
+        checkoutPage.ClickContinueOnPaymentMethod();
         
         switch (method)
         {
@@ -82,7 +83,7 @@ public class ShopUseCases(IWebDriverAdapter driver)
                     nameof(method), 
                     $"Unsupported payment method: {method}");
         }
-        checkoutPage.ClickContinueOnPaymentMethod();
+        checkoutPage.ClickContinueOnPaymentInformation();
     }
 
     public void CompleteCheckout()
@@ -90,8 +91,8 @@ public class ShopUseCases(IWebDriverAdapter driver)
         checkoutPage.ConfirmOrder();
     }
 
-    public void VerifyOrderConfirmation()
+    public bool VerifyOrderConfirmation()
     {
-        // Test implementation
+        return checkoutPage.IsOrderSuccessfullyProcessed();
     }
 }

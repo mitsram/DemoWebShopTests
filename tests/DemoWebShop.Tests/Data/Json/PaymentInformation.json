@@ -3,5 +3,7 @@
     "CardholderName": "John Doe",
     "CardNumber": "4242424242424242",
     "ExpirationMonth": "12",
-    "ExpirationYear": "2028"
+    "ExpirationYear": "2028",
+    "CVV": "123",
+    "PONumber": "123456"
 }
