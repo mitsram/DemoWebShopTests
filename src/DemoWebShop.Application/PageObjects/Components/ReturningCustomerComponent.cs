@@ -4,9 +4,9 @@ using CleanTest.Framework.Drivers.WebDriver.Interfaces;
 namespace DemoWebShop.Application.PageObjects;
 
 
-public class ReturningCustomerWidget : BasePage
+public class ReturningCustomerComponent : BasePage
 {
-    public ReturningCustomerWidget(IWebDriverAdapter webdriverAdapter) : base(webdriverAdapter)
+    public ReturningCustomerComponent(IWebDriverAdapter webdriverAdapter) : base(webdriverAdapter)
     {
     }
     public void LoginAs(string username, string password)

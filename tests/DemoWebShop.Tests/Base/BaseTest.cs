@@ -14,4 +14,13 @@ public class BaseTest
         driver = WebDriverFactory.Create(WebDriverType.Playwright, BrowserType.Chrome, false);
     }
     
+    [TearDown]
+    public void TearDown()
+    {
+        Thread.Sleep(1000);
+        if (driver != null)
+        {
+            driver.Dispose();
+        }
+    }
 }

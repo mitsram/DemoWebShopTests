@@ -20,7 +20,7 @@ public class BasePage
 
     public void ClickOnLoginLink()
     {
-        driver.FindElementByRole(AriaRole.Link, "Log in").Click();
+        driver.FindElementByClassName("ico-login").Click();
     }
 
     public bool IsOnLoginPage()
@@ -30,6 +30,13 @@ public class BasePage
 
     public bool IsLoggedIn(string username)
     {
-        return driver.FindElementByClassName("account").Nth(1).IsDisplayed();
+        try
+        {
+            return driver.FindElementByText(username).IsDisplayed();
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 }

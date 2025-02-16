@@ -6,16 +6,10 @@ using FluentAssertions;
 
 namespace DemoWebShop.Application.UseCases;
 
-public class AuthenticationUseCases
+public class AuthenticationUseCases(IWebDriverAdapter driver)
 {
-    private readonly ReturningCustomerWidget loginWidget;
-    private readonly BasePage basePage;
-
-    public AuthenticationUseCases(IWebDriverAdapter driver)
-    {
-        basePage = new BasePage(driver);
-        loginWidget = new ReturningCustomerWidget(driver);
-    }
+    private readonly ReturningCustomerComponent loginComponent = new(driver);
+    private readonly BasePage basePage = new(driver);
 
     public void NavigateToLoginWidget()
     {
@@ -27,7 +21,7 @@ public class AuthenticationUseCases
 
     public bool AttemptLogin(User user)
     {
-        loginWidget.LoginAs(user.Username!, user.Password!);
+        loginComponent.LoginAs(user.Username!, user.Password!);
         return basePage.IsLoggedIn(user.Username!);
     }
 }

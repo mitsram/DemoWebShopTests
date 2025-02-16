@@ -20,5 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\DemoWebShop.Application\DemoWebShop.Application.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Json\*.json" />
+  </ItemGroup>
 </Project>

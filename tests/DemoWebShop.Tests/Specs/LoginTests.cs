@@ -27,13 +27,22 @@ public class LoginTests : BaseTest
         var loginResult = authentication.AttemptLogin(user);
 
         // Assert
-        Assert.That(loginResult, Is.True, @"Login attempt for ${username} failed unexpectedly.");
+        Assert.That(loginResult, Is.True, $"Login attempt for {username} failed unexpectedly.");
     }
 
     [Test]
-    public void Should_FailLogin_WhenInvalidCredentialsProvided()
+    [TestCase("mitsram401@gmail.com", "Test12345")]
+    public void Should_FailLogin_WhenInvalidCredentialsProvided(string username, string password)
     {
-        // Test implementation
+        // Arrange
+        var user = new User { Username = username, Password = password };
+
+        // Act
+        authentication!.NavigateToLoginWidget();
+        var loginResult = authentication.AttemptLogin(user);
+
+        // Assert
+        Assert.That(loginResult, Is.False, $"Login attempt for {username} with wrong password passed unexpectedly.");
     }
 
     [Test]

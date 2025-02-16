@@ -1,0 +1,7 @@
+{
+    "CreditCardType": "Visa",
+    "CardholderName": "John Doe",
+    "CardNumber": "4242424242424242",
+    "ExpirationMonth": "12",
+    "ExpirationYear": "2028"
+}

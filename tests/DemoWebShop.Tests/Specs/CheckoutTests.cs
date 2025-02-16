@@ -1,38 +1,44 @@
+using DemoWebShop.Application.Entities;
+using DemoWebShop.Application.UseCases;
 using DemoWebShop.Tests.Base;
-using NUnit.Framework;
+using DemoWebShop.Tests.Data.Builders;
 
 namespace DemoWebShop.Tests;
 
 public class CheckoutTests : BaseTest
 {
+    private AuthenticationUseCases? authentication;
+    private ShopUseCases? shop;
+    
     [SetUp]
     public void SetUp()
     {
-        // authentication.GoToLoginPage();
-        // authentication.AttempLogin(User user);
+        authentication = new AuthenticationUseCases(driver);
+        shop = new ShopUseCases(driver);
     }
 
     [Test]
     public void Should_CompleteCheckout_WhenValidPaymentProvided()
     {
-        // Test implementation
-    }
+        // Arrange
+        var user = new User { Username = "mitsram401@gmail.com", Password = "Default12345" };        
+        var paymentInfomation = PaymentInformationBuilder.CreateFromJson().Build();
+        
 
-    [Test]
-    public void Should_FailCheckout_WhenInsufficientStock()
-    {
-        // Test implementation
-    }
+        // Act
+        authentication!.NavigateToLoginWidget();
+        authentication.AttemptLogin(user);
+        
+        shop!.SearchProduct("Blue Jeans");
+        shop.AddProductToCart("Blue Jeans");
+        shop.StartCheckout();
+        shop.ProvideBillingAddress();
+        shop.ProvideShippingAddress();
+        shop.ChooseShippingMethod(ShippingMethod.Standard);
+        shop.ProvidePaymentDetails(PaymentMethod.CreditCard, paymentInfomation);        
+        shop.CompleteCheckout();
+        shop.VerifyOrderConfirmation();
 
-    [Test]
-    public void Should_RequireShippingAddress_WhenCheckingOutPhysicalProducts()
-    {
-        // Test implementation
-    }
-
-    [Test]
-    public void Should_ApplyDiscount_WhenValidCouponProvided()
-    {
-        // Test implementation
+        // Assert
     }
 }
