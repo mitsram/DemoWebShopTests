@@ -9,35 +9,36 @@ public class CheckoutTests : BaseTest
 {
     private AuthenticationUseCases? authentication;
     private ShopUseCases? shop;
+    private CartUseCases? cart;
+    private CheckoutUseCases? checkout;
     
     [SetUp]
     public void SetUp()
     {
         authentication = new AuthenticationUseCases(driver);
         shop = new ShopUseCases(driver);
+        cart = new CartUseCases(driver);
+        checkout = new CheckoutUseCases(driver);
+        
+        var user = new User { Username = Environment.GetEnvironmentVariable("USERNAME"), Password = Environment.GetEnvironmentVariable("PASSWORD") };
+        authentication!.NavigateToLoginWidget();
+        authentication.AttemptLogin(user);
     }
 
     [Test]
     public void Should_CompleteCheckout_WhenValidPaymentProvided()
     {
         // Arrange
-        var user = new User { Username = "mitsram401@gmail.com", Password = "Default12345" };        
+        var product = new Product { Name = "Blue Jeans"};
         var paymentInfomation = PaymentInformationBuilder.CreateFromJson().Build();
-        
 
         // Act
-        authentication!.NavigateToLoginWidget();
-        authentication.AttemptLogin(user);
-        
-        shop!.SearchProduct("Blue Jeans");
-        shop.AddProductToCart("Blue Jeans");
-        shop.StartCheckout();
-        shop.ProvideBillingAddress();
-        shop.ProvideShippingAddress();
-        shop.ChooseShippingMethod(ShippingMethod.Standard);
-        shop.ProvidePaymentDetails(PaymentMethod.CreditCard, paymentInfomation);        
-        shop.CompleteCheckout();
-        var result = shop.VerifyOrderConfirmation();
+        shop!.SearchProduct(product.Name);
+        shop.AddProductToCart(product.Name);
+        shop.GoToCart();
+        cart!.ProceedToCheckout();
+        checkout!.CompletePurchase(paymentInfomation);
+        var result = checkout.VerifyOrderConfirmation();
 
         // Assert
         Assert.That(result, Is.True);

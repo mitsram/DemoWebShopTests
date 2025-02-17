@@ -1,6 +1,7 @@
 using CleanTest.Framework.Drivers.WebDriver.Enums;
 using CleanTest.Framework.Drivers.WebDriver.Interfaces;
 using CleanTest.Framework.Factories;
+using DotNetEnv;
 
 namespace DemoWebShop.Tests.Base;
 
@@ -8,6 +9,12 @@ public class BaseTest
 {
     protected IWebDriverAdapter driver;  
 
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
+    {
+        Env.TraversePath().Load();
+    }
+    
     [SetUp]
     public void Setup()
     {
@@ -18,9 +25,6 @@ public class BaseTest
     public void TearDown()
     {
         Thread.Sleep(1000);
-        if (driver != null)
-        {
-            driver.Dispose();
-        }
+        driver.Dispose();
     }
 }

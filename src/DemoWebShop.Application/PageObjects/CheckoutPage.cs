@@ -11,6 +11,7 @@ public class CheckoutPage : BasePage
     
     public void ClickContinueOnBillingAddress()
     {
+        Thread.Sleep(1000);
         var container = driver.FindElementById("billing-buttons-container");
         var continueButton = container.FindElementByClassName("new-address-next-step-button");
         continueButton.Click();
@@ -46,6 +47,7 @@ public class CheckoutPage : BasePage
     
     public void SelectPaymentMethod(PaymentMethod method)
     {
+        Thread.Sleep(1000);
         var methodName = method switch
         {
             PaymentMethod.CreditCard => "Credit Card",
@@ -86,6 +88,7 @@ public class CheckoutPage : BasePage
 
     public void FillPaymentInformation(PaymentInformation data)
     {
+        Thread.Sleep(1000);
         driver.FindElementById("CreditCardType").SelectOptionByText(data.CreditCardType);
         driver.FindElementById("CardholderName").SendKeys(data.CardholderName);
         driver.FindElementById("CardNumber").SendKeys(data.CardNumber);
@@ -96,6 +99,7 @@ public class CheckoutPage : BasePage
     
     public void ConfirmOrder()
     {
+        Thread.Sleep(1000);
         var container = driver.FindElementById("confirm-order-buttons-container");
         var continueButton = container.FindElementByClassName("confirm-order-next-step-button");
         continueButton.Click();
@@ -103,7 +107,7 @@ public class CheckoutPage : BasePage
     
     public bool IsOrderSuccessfullyProcessed()
     {
-        Thread.Sleep(2000);
+        Thread.Sleep(5000);
         return driver.FindElementByText("Your order has been successfully processed!").IsDisplayed();
         // var successMessage = driver.FindElementByClassName("order-completed");
         // return successMessage.IsDisplayed();

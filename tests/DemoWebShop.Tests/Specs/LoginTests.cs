@@ -16,10 +16,11 @@ public class LoginTests : BaseTest
     }
 
     [Test]
-    [TestCase("mitsram401@gmail.com", "Default12345")]
-    public void Should_LoginSuccessfully_WhenValidCredentialsProvided(string username, string password)
+    public void Should_LoginSuccessfully_WhenValidCredentialsProvided()
     {
         // Arrange
+        var username = Environment.GetEnvironmentVariable("USERNAME");
+        var password = Environment.GetEnvironmentVariable("PASSWORD");        
         var user = new User { Username = username, Password = password };
 
         // Act
@@ -31,7 +32,7 @@ public class LoginTests : BaseTest
     }
 
     [Test]
-    [TestCase("mitsram401@gmail.com", "Test12345")]
+    [TestCase("test@gmail.com", "Test12345")]
     public void Should_FailLogin_WhenInvalidCredentialsProvided(string username, string password)
     {
         // Arrange
