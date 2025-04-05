@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{480EE6E4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoWebShop.Tests", "tests\DemoWebShop.Tests\DemoWebShop.Tests.csproj", "{5226C52B-3C5A-4F5D-9BCD-41242B10BC0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoWebShop.Cucumber", "tests\DemoWebShop.Cucumber\DemoWebShop.Cucumber.csproj", "{D9AF6AA9-CA56-4117-8607-97E5BC712634}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,14 +28,9 @@ Global
 		{5226C52B-3C5A-4F5D-9BCD-41242B10BC0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5226C52B-3C5A-4F5D-9BCD-41242B10BC0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5226C52B-3C5A-4F5D-9BCD-41242B10BC0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9AF6AA9-CA56-4117-8607-97E5BC712634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9AF6AA9-CA56-4117-8607-97E5BC712634}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9AF6AA9-CA56-4117-8607-97E5BC712634}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9AF6AA9-CA56-4117-8607-97E5BC712634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{077EF31F-CCB4-428B-AA61-0083D3DE776C} = {61D1F21E-C9A1-4BC4-AA06-11C8ED4BD717}
 		{5226C52B-3C5A-4F5D-9BCD-41242B10BC0A} = {480EE6E4-013E-4492-AF23-0B94DDB6FB39}
-		{D9AF6AA9-CA56-4117-8607-97E5BC712634} = {480EE6E4-013E-4492-AF23-0B94DDB6FB39}
 	EndGlobalSection
 EndGlobal

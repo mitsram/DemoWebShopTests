@@ -26,6 +26,7 @@ public class CheckoutTests : BaseTest
     }
 
     [Test]
+    [Category("Smoke")]
     public void Should_CompleteCheckout_WhenValidPaymentProvided()
     {
         // Arrange
@@ -41,6 +42,7 @@ public class CheckoutTests : BaseTest
         var result = checkout.VerifyOrderConfirmation();
 
         // Assert
-        Assert.That(result, Is.True);
+        Assert.That(result, Is.True, "Order confirmation was not shown");
+        
     }
 }

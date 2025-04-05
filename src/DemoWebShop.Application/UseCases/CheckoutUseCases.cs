@@ -41,7 +41,6 @@ public class CheckoutUseCases(IWebDriverAdapter driver)
         Thread.Sleep(1000);
         var radio = driver.FindElementByXPath($"//label[contains(., '{methodName}')]/preceding-sibling::input[@type='radio']");
         radio.Click();
-        Thread.Sleep(1000);
         checkoutPage.ClickContinueOnShippingMethod();
     }
     

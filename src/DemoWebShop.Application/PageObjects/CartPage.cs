@@ -10,8 +10,7 @@ public class CartPage : BasePage
     
     public void ClickOnTermsOfService()
     {
-        var termsOfServiceCheckbox = driver.FindElementById("termsofservice");
-        termsOfServiceCheckbox.Click();
+        driver.FindElementById("termsofservice").Click();        
     }
     
     public void ClickOnCheckoutButton()

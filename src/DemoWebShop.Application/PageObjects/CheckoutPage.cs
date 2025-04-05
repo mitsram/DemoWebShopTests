@@ -3,15 +3,11 @@ using DemoWebShop.Application.Entities;
 
 namespace DemoWebShop.Application.PageObjects;
 
-public class CheckoutPage : BasePage
+public class CheckoutPage(IWebDriverAdapter webdriverAdapter) : BasePage(webdriverAdapter)
 {
-    public CheckoutPage(IWebDriverAdapter webdriverAdapter) : base(webdriverAdapter)
-    {
-    }
-    
     public void ClickContinueOnBillingAddress()
     {
-        Thread.Sleep(1000);
+        Wait();
         var container = driver.FindElementById("billing-buttons-container");
         var continueButton = container.FindElementByClassName("new-address-next-step-button");
         continueButton.Click();
@@ -19,6 +15,7 @@ public class CheckoutPage : BasePage
     
     public void ClickContinueOnShippingAddress()
     {
+        Wait();
         var container = driver.FindElementById("shipping-buttons-container");
         var continueButton = container.FindElementByClassName("new-address-next-step-button");
         continueButton.Click();
@@ -26,6 +23,7 @@ public class CheckoutPage : BasePage
     
     public void ClickContinueOnShippingMethod()
     {
+        Wait();
         var container = driver.FindElementById("shipping-method-buttons-container");
         var continueButton = container.FindElementByClassName("shipping-method-next-step-button");
         continueButton.Click();
@@ -47,7 +45,7 @@ public class CheckoutPage : BasePage
     
     public void SelectPaymentMethod(PaymentMethod method)
     {
-        Thread.Sleep(1000);
+        Wait();
         var methodName = method switch
         {
             PaymentMethod.CreditCard => "Credit Card",
@@ -88,7 +86,7 @@ public class CheckoutPage : BasePage
 
     public void FillPaymentInformation(PaymentInformation data)
     {
-        Thread.Sleep(1000);
+        Wait();
         driver.FindElementById("CreditCardType").SelectOptionByText(data.CreditCardType);
         driver.FindElementById("CardholderName").SendKeys(data.CardholderName);
         driver.FindElementById("CardNumber").SendKeys(data.CardNumber);
@@ -99,7 +97,7 @@ public class CheckoutPage : BasePage
     
     public void ConfirmOrder()
     {
-        Thread.Sleep(1000);
+        Wait();
         var container = driver.FindElementById("confirm-order-buttons-container");
         var continueButton = container.FindElementByClassName("confirm-order-next-step-button");
         continueButton.Click();
@@ -111,5 +109,10 @@ public class CheckoutPage : BasePage
         return driver.FindElementByText("Your order has been successfully processed!").IsDisplayed();
         // var successMessage = driver.FindElementByClassName("order-completed");
         // return successMessage.IsDisplayed();
+    }
+
+    private void Wait()
+    {
+        Thread.Sleep(1000);
     }
 }

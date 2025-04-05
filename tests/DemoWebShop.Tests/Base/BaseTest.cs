@@ -1,7 +1,9 @@
 using CleanTest.Framework.Drivers.WebDriver.Enums;
 using CleanTest.Framework.Drivers.WebDriver.Interfaces;
 using CleanTest.Framework.Factories;
+using DemoWebShop.Tests.Config;
 using DotNetEnv;
+using Microsoft.Extensions.Configuration;
 
 namespace DemoWebShop.Tests.Base;
 
@@ -18,7 +20,14 @@ public class BaseTest
     [SetUp]
     public void Setup()
     {
-        driver = WebDriverFactory.Create(WebDriverType.Playwright, BrowserType.Chrome, false);
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(TestContext.CurrentContext.TestDirectory)
+            .AddJsonFile("Config/appsettings.json")
+            .AddEnvironmentVariables()
+            .Build();
+        var config = new TestConfiguration(configuration);
+
+        driver = WebDriverFactory.Create(config.WebDriverType, config.BrowserType, config.Options);
     }
     
     [TearDown]

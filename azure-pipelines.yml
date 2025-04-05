@@ -1,0 +1,55 @@
+trigger: none
+# - master
+
+schedules:
+  - cron: "0 19 * * *"
+    displayName: Daily midnight build
+    branches:
+      include:
+        - master
+    always: true
+
+pool:
+    vmImage: 'ubuntu-latest'
+
+variables:
+  - group: AmlTestAutomation
+  - name: TEST_TYPE
+    value: 'Smoke' # Default to Smoke tests, can be overridden in pipeline runs
+
+stages:
+- stage: Restore
+  displayName: 'Restore packages'
+  jobs:
+  - job: Restore
+    displayName: 'Restore packages'
+    steps:
+    - script: |
+        dotnet restore
+      displayName: 'Restore packages'
+- stage: Test
+  displayName: 'Test'
+  jobs:
+  - job: Test
+    displayName: 'Test'
+    steps:
+    - script: |
+        echo "Running tests"
+        dotnet build --configuration Release
+        pwsh ./tests/DemoWebApp.Tests/bin/Release/net9.0/playwright.ps1 install chromium --with-deps
+        dotnet test --configuration Release --logger "trx;LogFileName=TestResults.trx" --filter "Category=${TEST_TYPE:-Smoke}" -- NUnit.NumberOfTestWorkers=1
+      env:
+        PAT: $(PAT)
+        API_CLIENT_ID: $(API_CLIENT_ID)
+        API_CLIENT_SECRET: $(API_CLIENT_SECRET)
+        API_TENANT_ID: $(API_TENANT_ID)
+        API_SUBSCRIPTION_ID: $(API_SUBSCRIPTION_ID)
+        TEST_TYPE: $(TEST_TYPE)
+      displayName: 'Test'
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/*.trx'
+        failOnEmptyTestResults: true
+        testRunTitle: 'Test Results'
+      condition: always()
