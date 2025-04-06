@@ -12,8 +12,7 @@ public class AuthenticationUseCases(IWebDriverAdapter driver)
     private readonly BasePage basePage = new(driver);
 
     public void NavigateToLoginWidget()
-    {
-        basePage.NavigateToHomePage();
+    {        
         basePage.ClickOnLoginLink();
         var isOnLoginPage = basePage.IsOnLoginPage();
         isOnLoginPage.Should().BeTrue();

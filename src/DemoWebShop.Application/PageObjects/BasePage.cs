@@ -13,9 +13,9 @@ public class BasePage
         driver = webdriverAdapter;
     }
 
-    public void NavigateToHomePage()
+    public void NavigateToHomePage(string url)
     {
-        driver.NavigateToUrl("https://demowebshop.tricentis.com/");
+        driver.NavigateToUrl(url);
     }
 
     public void ClickOnLoginLink()

@@ -28,6 +28,7 @@ public class BaseTest
         var config = new TestConfiguration(configuration);
 
         driver = WebDriverFactory.Create(config.WebDriverType, config.BrowserType, config.Options);
+        driver.NavigateToUrl(config.BaseUrl);
     }
     
     [TearDown]
