@@ -1,4 +1,5 @@
 
+using Allure.NUnit.Attributes;
 using CleanTest.Framework.Drivers.WebDriver.Interfaces;
 using DemoWebShop.Application.Entities;
 using DemoWebShop.Application.PageObjects;

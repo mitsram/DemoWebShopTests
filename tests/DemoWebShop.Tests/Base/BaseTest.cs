@@ -1,3 +1,4 @@
+using Allure.NUnit;
 using CleanTest.Framework.Drivers.WebDriver.Enums;
 using CleanTest.Framework.Drivers.WebDriver.Interfaces;
 using CleanTest.Framework.Factories;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace DemoWebShop.Tests.Base;
 
+[AllureNUnit]
 public class BaseTest
 {
     protected IWebDriverAdapter driver;  

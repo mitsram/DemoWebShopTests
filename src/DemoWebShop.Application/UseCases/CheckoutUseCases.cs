@@ -1,3 +1,4 @@
+using Allure.NUnit.Attributes;
 using CleanTest.Framework.Drivers.WebDriver.Interfaces;
 using DemoWebShop.Application.Entities;
 using DemoWebShop.Application.PageObjects;
@@ -8,6 +9,7 @@ public class CheckoutUseCases(IWebDriverAdapter driver)
 {
     private readonly CheckoutPage checkoutPage = new(driver);
     
+    [AllureStep("Complete purchase")]
     public void CompletePurchase(PaymentInformation paymentInfomation)
     {
         ProvideBillingAddress();

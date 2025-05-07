@@ -1,4 +1,5 @@
 
+using Allure.NUnit.Attributes;
 using CleanTest.Framework.Drivers.WebDriver.Interfaces;
 using DemoWebShop.Application.Entities;
 using DemoWebShop.Application.PageObjects;
@@ -12,6 +13,7 @@ public class ShopUseCases(IWebDriverAdapter driver)
     private readonly CartPage cartPage = new(driver);
     private readonly CheckoutPage checkoutPage = new(driver);
     
+    [AllureStep("Search for product")]
     public void SearchProduct(string productName)
     {
         mainPage.SearchProduct(productName);
